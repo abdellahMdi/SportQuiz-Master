@@ -1,10 +1,9 @@
-import getQuestions from '../../my-app/src/Data';
+import getQuestions from '../../src/Data';
 import '../Question.css';
 import { useEffect, useState } from "react";
- function SingelQuestion() {
+function SingelQuestion() {
   const [questions , setquestions]= useState([]);
   const [loading, setLoading] = useState(true);
- 
   useEffect(() => {
     getQuestions()
       .then((data) => {
@@ -16,7 +15,7 @@ import { useEffect, useState } from "react";
         setLoading(false);
       });
   }, []);
-   if (loading) return <p>Loading...</p>;
+  if (loading) return <p>Loading...</p>;
   if (!questions.length) return <p>No questions found</p>;
   const allAnswers = [
     questions[0].correct_answer,
@@ -25,7 +24,6 @@ import { useEffect, useState } from "react";
  return (
     <div className="container_principale">
       <h1>Quiz App</h1>
-
       <div className="Question_container">
         {loading && <p>Loading...</p>}
         {!loading &&
@@ -37,7 +35,6 @@ import { useEffect, useState } from "react";
             <button key={index} className="answer_btn">
               {answer}
             </button>
-            
           ))}
           <div className='buttons'>
            <button className='btn2'>Back</button> 

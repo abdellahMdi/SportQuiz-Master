@@ -1,8 +1,0 @@
- const getQuestions = async () => {
-  const response = await fetch("https://opentdb.com/api.php?amount=15");
-  const data = await response.json();
-  console.log(data);
-  
-  return data.results;
-};
-export default getQuestions;
