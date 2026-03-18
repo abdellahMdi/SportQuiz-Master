@@ -24,27 +24,43 @@ function SingelQuestion() {
   }, []);
 
   if (loading) return <p>Loading...</p>;
-  if (!questions.length) return <p>No questions found</p>;
-
-  // السؤال الحالي حسب index
+  if (!questions.length) return <p>No questions found</p>
   const currentQuestion = questions[value.indece];
-
-  // دمج الأجوبة
   const allAnswers = [
     currentQuestion.correct_answer,
     ...currentQuestion.incorrect_answers,
   ];
+
+//   const isCorrect = answer === currentQuestion.correct_answer;
+const handleClick = (answer) => {
+  if (answer === currentQuestion.correct_answer) {
+    setvalue((prev) => ({
+      ...prev,
+      score: prev.score + 1,
+      indece: prev.indece < questions.length - 1
+        ? prev.indece + 1
+        : prev.indece,
+    }));
+  } else {
+    setvalue((prev) => ({
+      ...prev,
+      indece: prev.indece < questions.length - 1
+        ? prev.indece + 1
+        : prev.indece,
+    }));
+  }
+};
   return (
     <div className="container_principale">
-      <h1>Quiz App</h1>
-
+    return <h1>Score: {value.score}</h1>;
+      <h1>Quiz App</h1> 
       <div className="Question_container">
         <h2 className="Title">
           {currentQuestion.question}
         </h2>
         <div className="Answers_btn_container">
           {allAnswers.map((answer, index) => (
-            <button key={index} className="answer_btn">
+            <button onClick={ () => handleClick(answer)} key={index} className="answer_btn">
               {answer}
             </button>
           ))}
