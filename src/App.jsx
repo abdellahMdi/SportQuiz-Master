@@ -1,4 +1,4 @@
-import SingleQuestion  from '../my-app/src/Conponent/Question';
+import SingleQuestion  from './Components/Questions';
 function App() {
   return (
     <>

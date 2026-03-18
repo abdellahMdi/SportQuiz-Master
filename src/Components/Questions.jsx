@@ -1,9 +1,16 @@
-import getQuestions from '../../src/Data';
-import '../Question.css';
+import getQuestions from "../Data/data";
+import "../question.css";
 import { useEffect, useState } from "react";
+
 function SingelQuestion() {
-  const [questions , setquestions]= useState([]);
+  const [questions, setquestions] = useState([]);
+  const [value, setvalue] = useState({
+    indece: 0,
+    score: 0,
+  });
+
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     getQuestions()
       .then((data) => {
@@ -15,37 +22,52 @@ function SingelQuestion() {
         setLoading(false);
       });
   }, []);
+
   if (loading) return <p>Loading...</p>;
   if (!questions.length) return <p>No questions found</p>;
+
+  // السؤال الحالي حسب index
+  const currentQuestion = questions[value.indece];
+
+  // دمج الأجوبة
   const allAnswers = [
-    questions[0].correct_answer,
-    ...questions[0].incorrect_answers,
+    currentQuestion.correct_answer,
+    ...currentQuestion.incorrect_answers,
   ];
- return (
+  return (
     <div className="container_principale">
       <h1>Quiz App</h1>
+
       <div className="Question_container">
-        {loading && <p>Loading...</p>}
-        {!loading &&
-          Array.isArray(questions) &&
-          <div className='Questions'>
-          <h1 className="Title">{questions[0].question}</h1>
-          <div className="Answers_btn_container">
+        <h2 className="Title">
+          {currentQuestion.question}
+        </h2>
+        <div className="Answers_btn_container">
           {allAnswers.map((answer, index) => (
             <button key={index} className="answer_btn">
               {answer}
             </button>
           ))}
-          <div className='buttons'>
-           <button className='btn2'>Back</button> 
-          <button className='btn'>Next</button>
-          </div>
         </div>
-          </div>
-          
-          }
+        <div className="buttons">
+          <button
+            className="btn"
+            onClick={() =>
+              setvalue((prev) => ({
+                ...prev,
+                indece:
+                  prev.indece < questions.length - 1
+                    ? prev.indece + 1
+                    : 0,
+              }))
+            }
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );
 }
+
 export default SingelQuestion;
