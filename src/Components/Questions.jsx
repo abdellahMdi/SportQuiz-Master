@@ -94,20 +94,24 @@ function SingelQuestion() {
         </div>
 
         <div className="buttons">
-          <button
-            className="btn"
-            onClick={() =>
-              setvalue((prev) => ({
-                ...prev,
-                indece:
-                  prev.indece < questions.length - 1
-                    ? prev.indece + 1
-                    : 0,
-              }))
-            }
-          >
-            Next
-          </button>
+        <button
+  className="btn"
+  onClick={() => {
+    if (value.indece < questions.length - 1) {
+      setvalue((prev) => ({
+        ...prev,
+        indece: prev.indece + 1,
+      }));
+    } else {
+      // غادي نمشيو لصفحة النتيجة
+      // navigate("/result");
+    }
+  }}
+>
+  {value.indece === questions.length - 1
+    ? "Show Result"
+    : "Next"}
+</button>
         </div>
       </div>
     </div>
