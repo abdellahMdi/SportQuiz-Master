@@ -4,12 +4,18 @@ import { useEffect, useState } from "react";
 
 function SingelQuestion() {
   const [questions, setquestions] = useState([]);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [shuffledAnswers, setShuffledAnswers] = useState([]);
   const [value, setvalue] = useState({
     indece: 0,
     score: 0,
   });
-
   const [loading, setLoading] = useState(true);
+
+  // shuffle function
+  const shuffleArray = (array) => {
+    return [...array].sort(() => Math.random() - 0.5);
+  };
 
   useEffect(() => {
     getQuestions()
@@ -23,48 +29,70 @@ function SingelQuestion() {
       });
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (!questions.length) return <p>No questions found</p>
-  const currentQuestion = questions[value.indece];
-  const allAnswers = [
-    currentQuestion.correct_answer,
-    ...currentQuestion.incorrect_answers,
-  ];
+  // shuffle answers when question changes
+  useEffect(() => {
+    if (questions.length > 0) {
+      const current = questions[value.indece];
+      const answers = [
+        current.correct_answer,
+        ...current.incorrect_answers,
+      ];
+      setShuffledAnswers(shuffleArray(answers));
+      setSelectedAnswer(null);
+    }
+  }, [value.indece, questions]);
 
-//   const isCorrect = answer === currentQuestion.correct_answer;
-const handleClick = (answer) => {
-  if (answer === currentQuestion.correct_answer) {
-    setvalue((prev) => ({
-      ...prev,
-      score: prev.score + 1,
-      indece: prev.indece < questions.length - 1
-        ? prev.indece + 1
-        : prev.indece,
-    }));
-  } else {
-    setvalue((prev) => ({
-      ...prev,
-      indece: prev.indece < questions.length - 1
-        ? prev.indece + 1
-        : prev.indece,
-    }));
-  }
-};
+  if (loading) return <p>Loading...</p>;
+  if (!questions.length) return <p>No questions found</p>;
+
+  const currentQuestion = questions[value.indece];
+
+  const handleClick = (answer) => {
+    setSelectedAnswer(answer);
+    if (answer === currentQuestion.correct_answer) {
+      setvalue((prev) => ({
+        ...prev,
+        score: prev.score + 1,
+      }));
+    }
+  };
+
   return (
     <div className="container_principale">
-    return <h1>Score: {value.score}</h1>;
-      <h1>Quiz App</h1> 
+      <h1 className="score">Score: {value.score}</h1>
+
+      <h1>Quiz App</h1>
+
       <div className="Question_container">
-        <h2 className="Title">
-          {currentQuestion.question}
-        </h2>
+        <p className="progress">
+        Question {value.indece + 1} / {questions.length}
+        </p>
+        <h2 className="Title">{currentQuestion.question}</h2>
+
         <div className="Answers_btn_container">
-          {allAnswers.map((answer, index) => (
-            <button onClick={ () => handleClick(answer)} key={index} className="answer_btn">
-              {answer}
-            </button>
-          ))}
+          {shuffledAnswers.map((answer, index) => {
+            let bgColor = "";
+
+            if (selectedAnswer === answer) {
+              bgColor =
+                answer === currentQuestion.correct_answer
+                  ? "green"
+                  : "red";
+            }
+
+            return (
+              <button
+                key={index}
+                onClick={() => handleClick(answer)}
+                className="answer_btn"
+                style={{ backgroundColor: bgColor }}
+              >
+                {answer}
+              </button>
+            );
+          })}
         </div>
+
         <div className="buttons">
           <button
             className="btn"
@@ -85,5 +113,4 @@ const handleClick = (answer) => {
     </div>
   );
 }
-
 export default SingelQuestion;
