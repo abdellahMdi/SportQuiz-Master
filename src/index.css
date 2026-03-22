@@ -30,6 +30,11 @@ body {
   box-shadow: 0 20px 50px rgba(49, 1, 185, 0.12);
 }
 
+.theme-dark .glass-card {
+  background: #211d3a;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
 .brand-button {
   border-radius: 1.25rem;
   background-color: var(--brand);
