@@ -89,7 +89,7 @@ export default function QuizScreen({ category, onFinish, onQuit }) {
   if (!currentQuestion) return null;
 
   return (
-    <section className="space-y-4">
+    <section className="fade-up space-y-4">
       <header className="glass-card flex items-center justify-between p-4">
         <div>
           <p className="text-xs uppercase tracking-widest text-slate-500">Category</p>
