@@ -1,6 +1,6 @@
 export default function HomeScreen({ categories, history, onStart }) {
   return (
-    <section className="space-y-5">
+    <section className="fade-up space-y-5">
       <header className="glass-card flex items-center justify-between p-5">
         <div>
           <p className="text-sm text-slate-500">Welcome back</p>
