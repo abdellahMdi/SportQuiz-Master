@@ -16,7 +16,16 @@ function App() {
   const [sessionResult, setSessionResult] = useState(null);
   const [history, setHistory] = useState(() => {
     const raw = localStorage.getItem("quiz-history");
-    return raw ? JSON.parse(raw) : [];
+
+    if (!raw) {
+      return [];
+    }
+
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return [];
+    }
   });
 
   const summaryText = useMemo(() => {
