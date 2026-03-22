@@ -2,7 +2,7 @@ export default function ResultScreen({ result, onBackHome, summaryText }) {
   const points = result.score * 50;
 
   return (
-    <section className="space-y-5">
+    <section className="fade-up space-y-5">
       <div className="glass-card p-6 text-center">
         <p className="text-xs uppercase tracking-widest text-slate-500">Result</p>
         <h1 className="mt-1 text-4xl font-bold text-[#3101B9]">
