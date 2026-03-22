@@ -36,6 +36,7 @@ export default function QuestionCard({
               key={option}
               onClick={() => onSelect(option)}
               disabled={Boolean(selected) || disabled}
+              aria-label={`Answer option ${option}`}
               className={`rounded-2xl border p-3 text-left font-medium transition ${resolveState(option)} ${
                 selected ? "cursor-not-allowed" : ""
               }`}
