@@ -124,6 +124,10 @@ export default function QuizScreen({ category, onFinish, onQuit }) {
         hiddenOptions={hiddenOptions}
       />
 
+      {selected === "__timeout__" && (
+        <p className="text-center text-sm font-semibold text-red-500">Time is up. Press Next to continue.</p>
+      )}
+
       <div className="grid grid-cols-2 gap-3">
         <button onClick={onQuit} className="rounded-2xl border border-purple-200 bg-white px-4 py-3 font-semibold text-slate-600">
           Back
