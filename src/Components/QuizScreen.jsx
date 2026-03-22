@@ -4,7 +4,7 @@ import Loading from "./Loading";
 import ProgressBar from "./ProgressBar";
 import QuestionCard from "./QuestionCard";
 import Timer from "./Timer";
-import { fetchQuestions } from "../services/api";
+import { fetchQuestions, shuffleArray } from "../services/api";
 
 const QUESTION_LIMIT = 20;
 const TIMER_SECONDS = 25;
@@ -78,7 +78,7 @@ export default function QuizScreen({ category, onFinish, onQuit }) {
       (option) => option !== currentQuestion.correctAnswer
     );
 
-    setHiddenOptions(wrongAnswers.slice(0, 2));
+    setHiddenOptions(shuffleArray(wrongAnswers).slice(0, 2));
     setHintUsed(true);
   };
 
