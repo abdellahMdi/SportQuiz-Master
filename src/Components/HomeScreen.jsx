@@ -16,6 +16,12 @@ export default function HomeScreen({ categories, history, onStart }) {
           <p className="text-sm uppercase tracking-widest text-purple-200">Daily challenge</p>
           <h2 className="text-3xl font-bold">Play and Win</h2>
           <p className="mt-2 text-sm text-purple-100">Answer fast, climb the board, and collect points.</p>
+          <button
+            onClick={() => onStart(categories[0])}
+            className="mt-4 rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-[#3101B9]"
+          >
+            Quick Start
+          </button>
         </div>
       </div>
 
