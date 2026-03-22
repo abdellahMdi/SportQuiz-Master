@@ -53,6 +53,7 @@ export default function HomeScreen({ categories, history, onStart }) {
         <ul className="space-y-2">
           {history.length === 0 && (
             <li className="rounded-2xl bg-[#F3E8FF] p-3 text-left text-sm text-slate-500">
+              <span className="mr-2">-</span>
               No recent games yet. Start your first quiz.
             </li>
           )}
