@@ -95,7 +95,10 @@ export default function QuizScreen({ category, onFinish, onQuit }) {
           <p className="text-xs uppercase tracking-widest text-slate-500">Category</p>
           <h1 className="text-2xl font-bold text-[#3101B9]">{category.title}</h1>
         </div>
-        <p className="rounded-2xl bg-[#F3E8FF] px-3 py-2 font-semibold text-[#3101B9]">{questionCounter}</p>
+        <div className="space-y-2 text-right">
+          <p className="rounded-2xl bg-[#F3E8FF] px-3 py-2 font-semibold text-[#3101B9]">{questionCounter}</p>
+          <p className="text-xs font-semibold text-slate-500">Score {score}</p>
+        </div>
       </header>
 
       <div className="glass-card space-y-4 p-4">
