@@ -31,6 +31,9 @@ export default function HomeScreen({ categories, history, onStart }) {
               onClick={() => onStart(category)}
               className="rounded-3xl border border-purple-200 bg-[#F3E8FF] p-4 text-left transition hover:-translate-y-0.5 hover:border-[#3101B9]"
             >
+              <span className="inline-grid h-7 w-7 place-content-center rounded-xl bg-white text-sm font-bold text-[#3101B9]">
+                {category.icon}
+              </span>
               <p className="text-xs font-semibold uppercase tracking-wide text-purple-700">{category.subtitle}</p>
               <p className="mt-1 text-lg font-bold text-[#3101B9]">{category.title}</p>
             </button>
